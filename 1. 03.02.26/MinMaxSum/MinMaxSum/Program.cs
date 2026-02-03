@@ -44,8 +44,8 @@ namespace MinMaxSum
             //kirjuta lühidalt, mis see tähendab 
 
             Console.WriteLine(Array.BinarySearch(numbers, 9));
-
-            }
+        
+            
         }
     }
 }
