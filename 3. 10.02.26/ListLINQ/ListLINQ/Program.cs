@@ -12,6 +12,7 @@ namespace ListLINQ
             //teeme "andmebaas"
             //ja selleks on vaja luua class nimega Person
             IList<Person> person = new List<Person>()
+            {
                 new Person() { Id = 1, Name = "Juku", Age = 10 },
                 new Person() { Id = 2, Name = "Jaanus", Age = 11 },
                 new Person() { Id = 3, Name = "Joosep", Age = 8 },
