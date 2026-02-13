@@ -16,7 +16,7 @@ namespace StrucktProject
             Console.WriteLine(intAndString.Name);
             Console.WriteLine(intAndString.Age);
             Console.WriteLine("------------------------------------");
-            InsertedIntAndString insertedIntAndString = new InsertedIntAndString(Tallinn, 7942); 
+            InsertedIntAndString insertedIntAndString = new InsertedIntAndString();
             Console.WriteLine(insertedIntAndString.City);
             Console.WriteLine(insertedIntAndString.Postalcode);
         }
