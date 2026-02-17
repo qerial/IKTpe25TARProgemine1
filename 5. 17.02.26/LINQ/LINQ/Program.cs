@@ -46,7 +46,6 @@ namespace LINQ
                 .Where (x => x.Name == name);
             foreach (var  person in people)
                 Console.WriteLine(person.Name);
-            
         }
     }
 }
