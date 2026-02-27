@@ -189,7 +189,7 @@ namespace LinqTakeSkip
             Console.WriteLine("--------Min--------");
 
             var Minimum = PeopleList.people.Min(x => x.Age);
-            Console.WriteLine("Kõige vanem inimene on " + Minimum);
+            Console.WriteLine("Kõige noorem inimene on " + Minimum);
         }
 
 
