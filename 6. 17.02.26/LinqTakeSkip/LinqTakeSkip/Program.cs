@@ -14,6 +14,8 @@ namespace LinqTakeSkip
             Console.WriteLine("5. AverageLINQ");
             Console.WriteLine("6. CountLINQ");
             Console.WriteLine("7. Sum");
+            Console.WriteLine("8. Max");
+            Console.WriteLine("9. Min");
             Console.WriteLine("\n");
             //siin kasutada switchi ja peab saama Skip meetodit kutsuda
             int choice = int.Parse(Console.ReadLine());
@@ -44,6 +46,12 @@ namespace LinqTakeSkip
                     break;
                 case 7:
                     Sum();
+                    break;
+                case 8:
+                    Max();
+                    break;
+                case 9:
+                    Min();
                     break;
 
                 default:
@@ -146,6 +154,44 @@ namespace LinqTakeSkip
             Console.WriteLine("--------Sum--------");
             var summary = PeopleList.people.Sum(x => x.Age);
             Console.WriteLine("Kõikide vanus on kokku " + summary);
+
+            Console.WriteLine();
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("täisealiste isikute koondarv");
+            var numAdults = 0;
+            var NumAdults = PeopleList.people.Sum(x =>
+            {
+                if (x.Age >= 18)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            });
+            Console.WriteLine("Täiskasvanud isikute koondarv " + NumAdults);
         }
+        public static void Max()
+        {
+            Console.Clear();
+            Console.WriteLine("--------Max--------");
+
+            var Maximum = PeopleList.people.Max(x => x.Age);
+            Console.WriteLine("Kõige vanem inimene on " + Maximum);
+
+
+
+        }
+        public static void Min()
+        {
+            Console.Clear();
+            Console.WriteLine("--------Min--------");
+
+            var Minimum = PeopleList.people.Min(x => x.Age);
+            Console.WriteLine("Kõige vanem inimene on " + Minimum);
+        }
+
+
     }
 }
