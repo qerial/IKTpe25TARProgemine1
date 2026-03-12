@@ -36,6 +36,8 @@ namespace Inheritance
         protected int height;
     }
     //koolon tähendab pärimist
+    //läbi pärimise saame kasutada muutujaid width ja height, mis asuvad Shape classis
+    //ning neid ei pea siis defineerima rectangle classis
     class Rectangle : Shape
     {
         public int GetArea()
