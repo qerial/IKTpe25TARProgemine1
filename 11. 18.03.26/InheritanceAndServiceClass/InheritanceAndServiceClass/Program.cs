@@ -8,6 +8,7 @@ namespace IncheritanceAndServicesClass.Appservices
         static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             Console.WriteLine("Hello World!");
         }
     }
