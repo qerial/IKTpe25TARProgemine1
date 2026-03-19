@@ -14,10 +14,18 @@ namespace InheritanceAndServiceClass.Services
         {
             Console.WriteLine("Car Services");
         }
-
-        public void PostData()
+        public void SaveAsync() 
         {
             Console.WriteLine("andmed on edukalt salvestatud");
+        }
+
+        public void UpdateData()
+        {
+            Console.WriteLine("andmed on edukalt uuendatud");
+        }
+        public void EraseData()
+        {
+            Console.WriteLine("Andmed on edukalt kustutatud");
         }
     }
 }

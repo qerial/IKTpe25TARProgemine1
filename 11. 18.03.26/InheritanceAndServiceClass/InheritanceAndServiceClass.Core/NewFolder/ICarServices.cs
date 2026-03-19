@@ -9,5 +9,10 @@ namespace InheritanceAndServiceClass.Core.NewFolder
     public interface ICarServices
     {
         void GetData();
+        void SaveAsync();
+
+        void UpdateData();
+        void EraseData();
     }
+
 }

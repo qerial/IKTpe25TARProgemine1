@@ -1,5 +1,5 @@
 ﻿using System.Xml.Serialization;
-using IncheritanceAndServicesClass.Services;
+using IncheritanceAndServicesClass;
 using InheritanceAndServiceClass.Core.NewFolder;
 using InheritanceAndServiceClass.Services;
 using Microsoft.AspNetCore.Builder;
@@ -8,41 +8,32 @@ using Microsoft.Extensions.Hosting;
 
 namespace IncheritanceAndServicesClass.Appservices
 {
+
+
     internal class Program
     {
-        private readonly IDataServices _dataServices;
         private readonly ICarServices _carServices;
 
         public Program
-            (
-                IDataServices dataServices
-            )
-        {
-            _dataServices = dataServices;
-        }
-
-
-        public Program
-            (
-                ICarServices carServices
-            )
+        (
+            ICarServices carServices
+        )
         {
             _carServices = carServices;
         }
 
         static void Main(string[] args)
         {
-            var builder1 = WebApplication.CreateBuilder(args);
-
-            builder1.Services.AddScoped<IDataServices, DataServices>();
-
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddScoped<ICarServices, CarServices>();
 
-            Console.WriteLine("Hello, World Switch!");
-            Console.WriteLine("1. ");
-            Console.WriteLine("2. ");
+            Console.WriteLine("Hello World Switch!");
+            Console.WriteLine("1.GetAsync");
+            Console.WriteLine("2.PostData");
+            Console.WriteLine("3.PutData");
+            Console.WriteLine("4.DeleteData");
+            Console.WriteLine("\n");
             int choice = int.Parse(Console.ReadLine());
 
             switch (choice)
@@ -58,26 +49,41 @@ namespace IncheritanceAndServicesClass.Appservices
                     break;
 
                 case 2:
-                    var app1 = builder.Build();
-                    using (var scope = app1.Services.CreateScope())
+                    var ap = builder.Build();
+                    using (var scope = ap.Services.CreateScope())
                     {
-                        var dataServices = scope.ServiceProvider.GetRequiredService<IDataServices>();
-                        var program = new Program(dataServices);
-                        program.SaveAsync();
+                        var carServices = scope.ServiceProvider.GetRequiredService<ICarServices>();
+                        var program = new Program(carServices);
+                        program.PostData();
                     }
                     break;
 
                 case 3:
-
+                    var a = builder.Build();
+                    using (var scope = a.Services.CreateScope())
+                    {
+                        var carServices = scope.ServiceProvider.GetRequiredService<ICarServices>();
+                        var program = new Program(carServices);
+                        program.PutData();
+                    }
                     break;
+
                 case 4:
+                    var appp = builder.Build();
+                    using (var scope = appp.Services.CreateScope())
+                    {
+                        var carServices = scope.ServiceProvider.GetRequiredService<ICarServices>();
+                        var program = new Program(carServices);
+                        program.DeleteData();
+                    }
+                    break;
+
 
                 default:
                     Console.WriteLine("Error");
                     break;
             }
         }
-                    
 
         public IActionResult GetAsync()
         {
@@ -86,14 +92,23 @@ namespace IncheritanceAndServicesClass.Appservices
             return View();
         }
 
-        private IActionResult View()
+        public IActionResult PostData()
         {
-            throw new NotImplementedException();
+            _carServices.SaveAsync();
+
+            return View();
         }
 
-        public IActionResult SaveAsync()
+        public IActionResult PutData()
         {
-            _dataServices.GetData();
+            _carServices.UpdateData();
+
+            return View();
+        }
+
+        public IActionResult DeleteData()
+        {
+            _carServices.EraseData();
 
             return View();
         }
@@ -102,7 +117,5 @@ namespace IncheritanceAndServicesClass.Appservices
         {
             throw new NotImplementedException();
         }
-
-        
     }
 }
