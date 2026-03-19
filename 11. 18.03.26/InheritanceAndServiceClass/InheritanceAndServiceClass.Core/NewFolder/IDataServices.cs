@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace InheritanceAndServiceClass.Core.NewFolder
 {
-    public interface ICarServices
+    public interface IDataServices
     {
         void GetData();
+        
     }
 }

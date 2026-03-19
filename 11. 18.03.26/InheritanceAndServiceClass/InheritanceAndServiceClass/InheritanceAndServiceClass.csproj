@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IncheritanceAndServicesClass.Appservices\IncheritanceAndServicesClass.Appservices.csproj" />
     <ProjectReference Include="..\InheritanceAndServiceClass.Core\InheritanceAndServiceClass.Core.csproj" />
   </ItemGroup>
 

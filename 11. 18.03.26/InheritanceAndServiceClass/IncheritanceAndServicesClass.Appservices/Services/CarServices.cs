@@ -14,5 +14,10 @@ namespace InheritanceAndServiceClass.Services
         {
             Console.WriteLine("Car Services");
         }
+
+        public void PostData()
+        {
+            Console.WriteLine("andmed on edukalt salvestatud");
+        }
     }
 }
