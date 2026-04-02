@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using University.Data;
 
 namespace University
@@ -11,7 +12,7 @@ namespace University
             builder.Services.AddDbContext<UniversityContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("UniversityContext")));
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews();   
 
             var app = builder.Build();
 
