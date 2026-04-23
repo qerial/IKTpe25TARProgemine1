@@ -40,12 +40,14 @@
                                     </tr>
                                     @foreach (var item in Model.EnrollmentsVm)
                                     {
-                                        <tr>
+                                       <tr>
+                                        <td>
                                             @Html.DisplayFor(modelItem => item.CourseVm.Title)
-                                        </tr>
+                                        </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Grade)
                                         </td>
+                                     </tr>
                                     }
                                 </table>
                             </dd>

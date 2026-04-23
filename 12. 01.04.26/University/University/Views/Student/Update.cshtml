@@ -1,0 +1,34 @@
+﻿@model University.ViewModel.StudentUpdateViewModel
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+<h1>
+    Student Update
+</h1>
+<div>
+<form asp-action="Update">
+    <div class="form-group">
+        <label asp-for="LastName" class="form-control"></label>
+        <input asp-for="LastName" placeholder="Your last name goes here" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FirstMidName" class="form-control"></label>
+        <input asp-for="FirstMidName" placeholder="Your name goes here" class="form-control" />
+        <span asp-validation-for="FirstMidName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EnrollmentDate" class="form-control"></label>
+        <input asp-for="EnrollmentDate" class="form-control" />
+        <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
+    </div>
+        <br />
+    <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary" />
+    </div>
+
+</form>
+</div>
