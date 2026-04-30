@@ -8,6 +8,7 @@ namespace University.ViewModel
         public string LastName { get; set; }
         public string FirstMidName { get; set; }
         public DateTime EnrollmentDate { get; set; }
+
         public ICollection<EnrollmentViewModel> EnrollmentsVm { get; set; }
     }
 
@@ -17,9 +18,10 @@ namespace University.ViewModel
         public int CourseId { get; set; }
         public int StudentId { get; set; }
         public Grade? Grade { get; set; }
+
         public CourseViewModel CourseVm { get; set; }
     }
-    
+
     public class CourseViewModel
     {
         public int CourseId { get; set; }

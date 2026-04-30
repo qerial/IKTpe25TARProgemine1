@@ -1,8 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using University.Data;
 using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.CompilerServices;
-using System.ComponentModel.DataAnnotations;
 
 
 namespace University

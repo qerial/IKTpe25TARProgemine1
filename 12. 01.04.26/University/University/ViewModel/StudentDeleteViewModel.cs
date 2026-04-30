@@ -7,6 +7,5 @@
         public string FirstMidName { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public ICollection<EnrollmentViewModel> EnrollmentsVm { get; set; }
-
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace University.ViewModel
+﻿using University.Models;
+
+namespace University.ViewModel
 {
     public class StudentIndexViewModel
     {
