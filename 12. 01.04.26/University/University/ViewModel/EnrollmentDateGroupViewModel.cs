@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using University.Controllers;
 
 namespace University.ViewModel
