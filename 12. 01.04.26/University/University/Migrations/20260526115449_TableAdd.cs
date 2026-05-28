@@ -11,6 +11,11 @@ namespace University.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.RenameColumn(
+                name: "FirstMidName",
+                table: "Student",
+                newName: "FirstName");
+
             migrationBuilder.AddColumn<int>(
                 name: "DepartmentId",
                 table: "Course",
@@ -25,7 +30,7 @@ namespace University.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(name: "First Name", type: "nvarchar(max)", nullable: false),
                     EnrollmentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -146,6 +151,11 @@ namespace University.Migrations
             migrationBuilder.DropColumn(
                 name: "DepartmentId",
                 table: "Course");
+
+            migrationBuilder.RenameColumn(
+                name: "FirstName",
+                table: "Student",
+                newName: "FirstMidName");
         }
     }
 }

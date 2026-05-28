@@ -5,15 +5,19 @@ namespace University.Models
     public class Instructor
     {
         public int Id { get; set; }
-
         public string LastName { get; set; }
-        [Column("FirstName")]
-
+        [Column("First Name")]
         public string FirstMidName { get; set; }
-
         public DateTime EnrollmentDate { get; set; }
 
-        public ICollection<CourseAssignment> CourseAssignments { get; set; }
+        //mis on icollection????
+        // ICollection on nimekiri - One-to-Many seos
+        // üks õpetaja saab õpetada MITMEID kursusi
+        public ICollection<CourseAssignment> CourseAssigments { get; set; }
+
+        //miks ei saa kasutada icollection, vaid lihtsalt officeAssigment
+        // One-to-One seos - õpetajal saab olla ainult ÜKS kontor
+        // seepärast ei kasuta ICollection-it, vaid lihtsalt objekti
         public OfficeAssignment OfficeAssignments { get; set; }
     }
 }

@@ -1,4 +1,3 @@
-using AspNetCoreGeneratedDocument;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -35,7 +34,7 @@ namespace University.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-                    public async Task<IActionResult> About()
+        public async Task<IActionResult> About()
         {
             IQueryable<EnrollmentDateGroupViewModel> data =
                 from student in _context.Students
@@ -47,9 +46,9 @@ namespace University.Controllers
                     StudentCount = dateGroup.Count(),
                 };
 
-            return View(await data.AsNoTracking().ToListAsync());
+            //Teha About vaade, mis kuvab üliõpilastele arvu registreerimise kuupäeva järgi.
 
+            return View(await data.AsNoTracking().ToListAsync());
         }
     }
 }
-

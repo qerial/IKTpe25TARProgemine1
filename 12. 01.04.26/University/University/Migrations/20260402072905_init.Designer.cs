@@ -12,8 +12,8 @@ using University.Data;
 namespace University.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    [Migration("20260514112306_FirstnameColumn")]
-    partial class FirstnameColumn
+    [Migration("20260402072905_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,6 +53,9 @@ namespace University.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CrouseId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("Grade")
                         .HasColumnType("int");
 
@@ -81,8 +84,7 @@ namespace University.Migrations
 
                     b.Property<string>("FirstMidName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("FirstName");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()

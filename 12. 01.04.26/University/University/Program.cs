@@ -11,11 +11,11 @@ namespace University
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<UniversityContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("UniversityContext")));
+            builder.Services.AddDbContext<Data.UniversityContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("UniversityContext")));
 
-            // Add database exception filter for development environment
-            // This will show detailed database errors during development
+            //Add datebase exception filter for develompment enivorment
+            //This will show detailed database errors druing development
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             // Add services to the container.
@@ -23,7 +23,6 @@ namespace University
 
             var app = builder.Build();
 
-            // create DB if it doesn't exist and seed initial data
             CreateDbIfNotExists(app);
 
             // Configure the HTTP request pipeline.
@@ -48,8 +47,8 @@ namespace University
             app.Run();
         }
 
-        //luuakse andmebaas, kui see veel ei eksisteeri
-        //ja sisestab sinna algandmed
+        //luuakse andmebaas, kui see veel ei eksisteeri 
+        //ja sisestab sinna alganded
         private static void CreateDbIfNotExists(IHost host)
         {
             using (var scope = host.Services.CreateScope())
@@ -58,13 +57,15 @@ namespace University
                 try
                 {
                     var context = services.GetRequiredService<UniversityContext>();
-                    DbInitializer.Initialize(context);
+                    DbInitializer.Initializer(context);
                 }
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred creating the DB.");
+                    logger.LogError(ex, "An error occurres creating the DB.");
+
                 }
+
             }
         }
     }

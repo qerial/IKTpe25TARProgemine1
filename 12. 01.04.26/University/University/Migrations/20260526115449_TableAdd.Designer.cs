@@ -12,7 +12,7 @@ using University.Data;
 namespace University.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    [Migration("20260526115118_TableAdd")]
+    [Migration("20260526115449_TableAdd")]
     partial class TableAdd
     {
         /// <inheritdoc />
@@ -130,7 +130,7 @@ namespace University.Migrations
                     b.Property<string>("FirstMidName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("FirstName");
+                        .HasColumnName("First Name");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -199,15 +199,15 @@ namespace University.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("University.Models.Instructor", "Instructor")
-                        .WithMany("CourseAssignments")
+                    b.HasOne("University.Models.Instructor", "Instructors")
+                        .WithMany("CourseAssigments")
                         .HasForeignKey("InstructorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Courses");
 
-                    b.Navigation("Instructor");
+                    b.Navigation("Instructors");
                 });
 
             modelBuilder.Entity("University.Models.Department", b =>
@@ -263,7 +263,7 @@ namespace University.Migrations
 
             modelBuilder.Entity("University.Models.Instructor", b =>
                 {
-                    b.Navigation("CourseAssignments");
+                    b.Navigation("CourseAssigments");
 
                     b.Navigation("OfficeAssignments")
                         .IsRequired();
