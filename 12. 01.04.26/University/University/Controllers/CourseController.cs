@@ -5,18 +5,18 @@ using University.Data;
 using University.Models;
 using University.ViewModel;
 using University.ViewModel.CoursesVM;
+using University.ViewModel.CourseVM;
+using CourseCreateViewModel = University.ViewModel.CourseVM.CourseCreateViewModel;
 
 namespace University.Controllers
 {
     public class CourseController : Controller
     {
-        //on vaja kututada välja Univercity constructor 
         private readonly UniversityContext _context;
         public CourseController
-         (
-             UniversityContext context
-         )
-
+            (
+                UniversityContext context
+            )
         {
             _context = context;
         }
@@ -24,23 +24,21 @@ namespace University.Controllers
         public async Task<IActionResult> Index()
         {
             var course = _context.Courses
-                .Include(c => c.Department)
                 .Select(c => new CourseIndexViewModel
                 {
                     CourseId = c.CourseId,
-                    Title = c.Title,
                     Credits = c.Credits,
+                    Title = c.Title,
                     DepartmentId = c.DepartmentId,
                     Department = new CourseDepartmentIndexViewModel
                     {
-                        DepartmentName = c.Department.Name
+                        DepartmentName = c.Departments.Name
                     }
                 });
 
             return View(course);
-
         }
-        [HttpGet]
+
         public async Task<IActionResult> Update(int? id)
         {
             if (id == null)
@@ -53,14 +51,15 @@ namespace University.Controllers
                 .Select(c => new CourseUpdateViewModel
                 {
                     CourseId = c.CourseId,
-                    Title = c.Title,
                     Credits = c.Credits,
+                    Title = c.Title,
                     Department = new CourseDepartmentIndexViewModel
                     {
-                        DepartmentName = c.Department != null ? c.Department.Name : null
+                        DepartmentName = c.Departments != null ? c.Departments.Name : null
                     }
                 })
                 .FirstOrDefaultAsync();
+
             return View(vm);
         }
 
@@ -74,7 +73,7 @@ namespace University.Controllers
                     CourseId = vm.CourseId,
                     Title = vm.Title,
                     Credits = vm.Credits,
-                    Department = new Department
+                    Departments = new Department
                     {
                         Name = vm.Department.DepartmentName
                     }
@@ -97,7 +96,6 @@ namespace University.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Create(CourseCreateViewModel vm)
         {
 
@@ -106,10 +104,7 @@ namespace University.Controllers
                 CourseId = vm.CourseId,
                 Title = vm.Title,
                 Credits = vm.Credits,
-                Department = new Department
-                {
-                    Name = vm.Department.Name
-                }
+                DepartmentId = vm.DepartmentId,
             };
 
             _context.Add(course);
@@ -119,7 +114,7 @@ namespace University.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -127,32 +122,36 @@ namespace University.Controllers
             }
 
             var course = await _context.Courses
-                .Include(c => c.Department)
+                .Include(c => c.Departments)
                 .Where(c => c.CourseId == id)
                 .Select(c => new CourseDetailsViewModel
                 {
                     CourseId = c.CourseId,
-                    Title = c.Title,
                     Credits = c.Credits,
+                    Title = c.Title,
+                    DepartmentId = c.DepartmentId,
                     Department = new CourseDepartmentIndexViewModel
                     {
-                        Name = c.Departments.Name
+                        DepartmentName = c.Departments.Name
                     }
                 })
                 .FirstOrDefaultAsync();
+
             if (course == null)
             {
                 return NotFound();
             }
+
             return View(course);
         }
 
-
         private void PopulateDepartmentDropDownList(object selectedDepartment = null)
         {
-            var departmentsQuery = from d in _context.Departments
-                                   orderby d.Name
-                                   select d;
+            var departmentsQuery = _context.Departments
+                .OrderBy(d => d.Name)
+                .GroupBy(d => d.Name)
+                .Select(g => g.First());
+
             ViewBag.DepartmentId = new SelectList(departmentsQuery
                 .AsNoTracking(), "DepartmentId", "Name", selectedDepartment);
         }
