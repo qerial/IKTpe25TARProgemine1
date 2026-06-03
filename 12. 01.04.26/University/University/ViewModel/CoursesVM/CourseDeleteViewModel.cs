@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace University.ViewModel.CourseVM
+namespace University.ViewModel.CoursesVM
 {
-    public class CourseCreateViewModel
+    public class CourseDeleteViewModel
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Number")]
@@ -15,8 +15,4 @@ namespace University.ViewModel.CourseVM
         public DepartmentViewModel Department { get; set; }
     }
 
-    public class DepartmentViewModel
-    {
-        public string? Name { get; set; }
-    }
 }

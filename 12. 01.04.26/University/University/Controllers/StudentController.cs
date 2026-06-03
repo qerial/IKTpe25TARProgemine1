@@ -104,6 +104,12 @@ namespace University.Controllers
                 //tagastab esimese elemendi andmetest, mis on tingimuses välja toodud
                 .FirstOrDefaultAsync(m => m.Id == id);
 
+            //kui student on null, siis tagastame NotFound() tulemuse
+            if (student == null)
+            {
+                return NotFound();
+            }
+
             var vm = new StudentDetailsViewModel
             {
                 Id = student.Id,
@@ -127,12 +133,6 @@ namespace University.Controllers
                     }).ToArray()
             };
 
-            //kui student on null, siis tagastame NotFound() tulemuse
-            if (student == null)
-            {
-                return NotFound();
-            }
-
             //kui student on leitud, siis tagastame View(vm) tulemuse
             return View(vm);
         }
@@ -153,7 +153,7 @@ namespace University.Controllers
         public async Task<IActionResult> Create(StudentCreateViewModel vm)
         {
             //kui model on valiidne, siis loome uue student'i ja salvestame selle andmebaasi
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var student = new Models.Student
                 {
@@ -270,6 +270,9 @@ namespace University.Controllers
 
 
         //tuleb teha ankeedi kustutamise nupp
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
         public async Task<IActionResult> DeletePost(int id)
         {
             try

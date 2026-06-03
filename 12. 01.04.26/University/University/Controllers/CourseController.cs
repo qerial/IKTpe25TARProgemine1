@@ -5,8 +5,8 @@ using University.Data;
 using University.Models;
 using University.ViewModel;
 using University.ViewModel.CoursesVM;
-using University.ViewModel.CourseVM;
-using CourseCreateViewModel = University.ViewModel.CourseVM.CourseCreateViewModel;
+using University.ViewModel.CoursesVM;
+using DepartmentViewModel = University.ViewModel.CoursesVM.DepartmentViewModel;
 
 namespace University.Controllers
 {
@@ -154,6 +154,58 @@ namespace University.Controllers
 
             ViewBag.DepartmentId = new SelectList(departmentsQuery
                 .AsNoTracking(), "DepartmentId", "Name", selectedDepartment);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var course = await _context.Courses
+                .Include(c => c.Departments)
+                .Where(c => c.CourseId == id)
+                .Select(c => new CourseDeleteViewModel
+                {
+                    CourseId = c.CourseId,
+                    Credits = c.Credits,
+                    Title = c.Title,
+                    DepartmentId = c.DepartmentId,
+                    Department = new DepartmentViewModel
+                    {
+                        Name = c.Departments.Name
+                    }
+                })
+                .FirstOrDefaultAsync();
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return View(course);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeletePost(int id)
+        {
+            try
+            {
+                var course = await _context.Courses.FindAsync(id);
+                if (course == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Courses.Remove(course);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
     }
 }

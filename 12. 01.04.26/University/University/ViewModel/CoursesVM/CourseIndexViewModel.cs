@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using University.Models;
 
-namespace University.ViewModel.CourseVM
+namespace University.ViewModel.CoursesVM
 {
     public class CourseIndexViewModel
     {
@@ -20,6 +20,12 @@ namespace University.ViewModel.CourseVM
     public class CourseDepartmentIndexViewModel
     {
         public string DepartmentName { get; set; }
+
+        public string Name
+        {
+            get => DepartmentName;
+            set => DepartmentName = value;
+        }
     }
 }
 
