@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using University.Data;
+using University.ServiceInterface;
 using University.Services;
 using Microsoft.Extensions.DependencyInjection;
 
