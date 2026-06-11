@@ -18,10 +18,12 @@ namespace University.Controllers
         private readonly IFileServices _fileServices;
         public CourseController
             (
-                UniversityContext context
+                UniversityContext context,
+                IFileServices fileservices
             )
         {
             _context = context;
+            _fileServices = fileservices;
         }
 
         public async Task<IActionResult> Index()
@@ -99,7 +101,7 @@ namespace University.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CourseCreateViewModel vm)
+        public async Task<IActionResult> Create(CourseCreateViewModel vm, IFormFile imageFile)
         {
 
             var course = new Course();
@@ -108,8 +110,10 @@ namespace University.Controllers
             course.Title = vm.Title;
             course.Credits = vm.Credits;
             course.DepartmentId = vm.DepartmentId;
-            _fileServices.FilesToApi(vm, course);
-
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                course.ImagePath = await _fileServices.UploadFileAsync(imageFile, vm.CourseId);
+            }
             
 
             _context.Add(course);

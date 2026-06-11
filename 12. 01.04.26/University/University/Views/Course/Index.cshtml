@@ -50,3 +50,11 @@
 }
 </tbody>
 </table>
+
+<div class="course-card">
+    @if (!string.IsNullOrEmpty(item.ImagePath))
+    {
+        <img scr="@item.ImagePath" alt="@item.Title" style="max-width: 200px; height: auto;"/>
+    }
+    <h3>@Item</h3>
+</div>
