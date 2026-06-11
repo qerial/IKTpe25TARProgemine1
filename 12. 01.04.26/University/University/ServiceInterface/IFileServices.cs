@@ -1,3 +1,6 @@
+using University.Models;
+using University.ViewModel.CoursesVM;
+
 namespace University.ServiceInterface
 {
     public interface IFileServices
@@ -31,5 +34,10 @@ namespace University.ServiceInterface
         /// Validate file before upload (check size, extension, etc.)
         /// </summary>
         bool ValidateFile(IFormFile file, long maxSizeInBytes = 10485760); // 10MB default
+
+        /// <summary>
+        /// Process files from course creation view model and associate with course
+        /// </summary>
+        Task<List<FileToApi>> FilesToApi(CourseCreateViewModel courseViewModel, Course course);
     }
 }
