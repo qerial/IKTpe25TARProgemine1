@@ -1,4 +1,6 @@
+using University.Models;
 using University.ServiceInterface;
+using University.ViewModel.CoursesVM;
 
 namespace University.Services
 {
@@ -254,6 +256,11 @@ namespace University.Services
                 ".gif" => "image/gif",
                 _ => "application/octet-stream"
             };
+        }
+
+        public Task<List<FileToApi>> FilesToApi(CourseCreateViewModel courseViewModel, Course course)
+        {
+            throw new NotImplementedException();
         }
     }
 }
