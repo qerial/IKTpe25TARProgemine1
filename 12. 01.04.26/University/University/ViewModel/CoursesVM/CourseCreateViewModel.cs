@@ -12,6 +12,9 @@ namespace University.ViewModel.CoursesVM
         public int Credits { get; set; }
         public int DepartmentId { get; set; }
         public DepartmentViewModel? Department { get; set; }
+        public List<IFormFile> Files { get; set; }
+        public List<ImageViewModel> image { get; set; }
+            = new List<ImageViewModel>();
     }
 
     public class DepartmentViewModel
